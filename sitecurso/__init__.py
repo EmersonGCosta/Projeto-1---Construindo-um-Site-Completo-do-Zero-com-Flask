@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import os
 import sqlalchemy
-from sitecurso import models
+
 
 app = Flask(__name__)
 
@@ -21,6 +21,8 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'alert-info'
 
+from sitecurso import models
+
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
 if not inspector.has_table("usuario"):
@@ -30,6 +32,7 @@ if not inspector.has_table("usuario"):
         print("Base de dados Criada")
 else:
     print("base de dados já existente")
-    
+
 from sitecurso import routes
+
 
