@@ -52,7 +52,7 @@ def login():
     if form_criarconta.validate_on_submit() and "botao_submit_criarconta" in request.form:
         senha_crypt= bcrypt.generate_password_hash(form_criarconta.senha.data)
         # criar usuário
-        usuario= Usuario(username= form_criarconta.username.data, email= form_criarconta.email.data, senha= senha_crypt).decode("utf-8")
+        usuario= Usuario(username= form_criarconta.username.data, email= form_criarconta.email.data, senha= senha_crypt)
         # adicionar seção
         database.session.add(usuario)
         # commit na seção
@@ -165,3 +165,4 @@ def excluir_post(post_id):
         return redirect(url_for('home'))
     else:
         abort(403)
+
